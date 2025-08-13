@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="{{url_for('static',filename='img/logo.png')}}" type="image/x-icon">
+        <link rel="stylesheet" href="{{url_for('static',filename='css/arti_main_style.css')}}">
+        <style>
+                        .logo img {
+                height: 65px;
+                width: 60px;
+                margin-bottom: 6px;
+            }
+            .dropdown {
+                position: relative;
+                display: inline-block;
+
+                ul {
+                    display: none;
+                    position: absolute;
+                    background-color: rgb(167, 96, 42);
+                    min-width: 160px;
+                    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+                    z-index: 1;
+                    padding: 10px;
+                    border-radius: 5px;
+                }
+
+                li {
+                    list-style: none;
+
+                }
+
+                a {
+                    color: #ffffff;
+                    text-decoration: none;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    transition: color 0.3s ease;
+                }
+            }
+             /* خلفية السحاب والصحراء */
+
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Dayman maak</title>
+    </head>
+
+    <body>
+
+        <header>
+            <h1 class="logo"><a href="/"><img src="{{url_for('static',filename='img/logo.png')}}" alt="logo"></a></h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/info">Information</a></li>
+                    <li><a href="/map">Interactive map</a></li>
+         
+                    <li><a href="/chatbot">Chatbot</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section>
+            <div class="container">
+                <div class="content">
+                    {% for place in place %}
+                    <a href="{{ place[2] }}">
+                        <div class="tourism_places-card">
+                            <div class="p-image">
+                                <img src="{{ place[0]}}" , alt="{{ place[2] }}">
+                            </div>
+
+                            <div class="p-info">
+                                <p class="p-category">
+                                    {{ place[1].replace('_', ' ').title() }}
+
+                                </p>
+                                <br>
+                                <strong class="p-title">
+                                    <span>
+                                        <a href="{{place[2]}}" class="more-details">More details</a>
+                                    </span>
+                                </strong>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+        </section>
+        <script>
+
+            //dropdown menu
+            document.querySelector('.dropdown').addEventListener('click', function () {
+                this.classList.toggle('active');
+                const dropdownMenu = this.querySelector('ul');
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+            // Close dropdown if clicked outside
+            document.addEventListener('click', function (event) {
+                const dropdown = document.querySelector('.dropdown');
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                    const dropdownMenu = dropdown.querySelector('ul');
+                    dropdownMenu.style.display = 'none';
+                }
+            });
+        </script>
+    </body>
+
+</html>

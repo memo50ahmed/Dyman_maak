@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Arab online | Egypt Map</title>
+        <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
+
+            #map {
+                width: 100vw;
+                height: 100vh;
+                z-index: 0;
+            }
+            .logo img {
+                width: 60px;
+                height: 60px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <header>
+            <h1 class="logo">
+                <a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo"></a>
+            </h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/info">Information</a></li>
+                    <li><a href="/map">Interactive map</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);">Booking <i class="fa-solid fa-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="/booking_hotel">Booking hotel</a></li>
+                            <li><a href="/booking_flight">Booking flight</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/chatbot">Chatbot</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="map"></div>
+
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+        <script>
+            // Landmarks from Flask (make sure this is passed correctly)
+            const landmarks = {{ landmarks | tojson | safe }};
+
+            // Create the Leaflet map centered on Egypt
+            const map = L.map('map').setView([26.8206, 30.8025], 6);  // Egypt center
+
+            // Add OpenStreetMap tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Add each landmark to the map
+            landmarks.forEach(d => {
+                const marker = L.circleMarker([d.lat, d.lng], {
+                    radius: 6,
+                    color: 'red',
+                    fillOpacity: 0.9
+                }).addTo(map);
+
+                marker.bindPopup(`<strong>${d.name_place}</strong><br><a href="/place/${d.url}" target="_blank">View Details</a>`);
+            });
+
+            // Dropdown menu toggle
+            document.querySelector('.dropdown')?.addEventListener('click', function (e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+                const dropdownMenu = this.querySelector('ul');
+                if (dropdownMenu) {
+                    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+
+            // Close dropdown on outside click
+            document.addEventListener('click', function (event) {
+                const dropdown = document.querySelector('.dropdown');
+                if (dropdown && !dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                    const dropdownMenu = dropdown.querySelector('ul');
+                    if (dropdownMenu) {
+                        dropdownMenu.style.display = 'none';
+                    }
+                }
+            });
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/arti_main_style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/arti.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                background: linear-gradient(to top, #f4e2d8, #cbe3f1);
+                overflow-x: hidden;
+                position: relative;
+            }
+
+        </style>
+        <title>Dayman Maak</title>
+    </head>
+
+    <body>
+
+        <header>
+            <h1 class="logo">
+                <a href="/"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo"></a>
+            </h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/info">Information</a></li>
+                    <li><a href="/map">Interactive map</a></li>
+                    <li><a href="/chatbot">Chatbot</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section>
+            {% block body %}
+            {% endblock %}
+        </section>
+
+        <script>
+            //dropdown menu
+            document.querySelector('.dropdown')?.addEventListener('click', function () {
+                this.classList.toggle('active');
+                const dropdownMenu = this.querySelector('ul');
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            // Close dropdown if clicked outside
+            document.addEventListener('click', function (event) {
+                const dropdown = document.querySelector('.dropdown');
+                if (dropdown && !dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                    const dropdownMenu = dropdown.querySelector('ul');
+                    dropdownMenu.style.display = 'none';
+                }
+            });
+        </script>
+    </body>
+
+</html>

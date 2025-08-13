@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>{{ place.name_place }}</h1>
+<img src="{{ place.link_photo }}" width="400">
+<p><strong>Type:</strong> <span>{{ place.place_type }}</span></p>
+<p><strong>Description:</strong></p>
+<textarea readonly rows="6" style="width:50%">{{ place.description }}</textarea>
+<p><strong>Map:</strong></p>
+<div>
+    {{ place.iframe_url | safe }}
+</div>
+<style>
+ 
+    span {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+    p {
+        font-size: 1.2em;
+        line-height: 1.5;
+        margin: 5px 0;
+        padding: 50px;
+        display: block;
+        text-align: center;
+    }
+    /*center  iframe p*/
+    iframe {
+        /*centrer page*/
+        display: block;
+        margin: 0 auto;
+        width: 50%;
+        height: 400px;
+        border: 30px solid #000000;
+    }
+    /*colors textarea center page*/
+    textarea {
+        margin-top: 20px;
+        background-color: #f0f0f0;
+        color: #333;
+        display: block;
+        margin: 0 auto;
+        padding: 10px;      
+        font-size: 1em;
+        width: 50%;
+        border: 1px solid #ccc;
+    }
+
+</style>
+{% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Admin Login</title>
+        <style>
+            body {
+                font-family: Arial;
+                background-color: #f4f4f4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            form {
+                background: white;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px #ccc;
+                width: 300px;
+            }
+
+            input,
+            button {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            button {
+                background: green;
+                color: white;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .error {
+                color: red;
+                font-size: 14px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <form method="POST">
+            <h2>Admin Login</h2>
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
+            <label>Username:</label>
+            <input type="text" name="username" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+    </body>
+
+</html>
