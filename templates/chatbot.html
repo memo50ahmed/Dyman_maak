@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/arti_main_style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dayman maak</title>
+
+        <style>
+            header {
+                position: relative;
+                height: 13.5vh;
+                background-color: rgb(255, 111, 0);
+                z-index: 1000;
+            }
+
+
+
+            .logo img {
+                height: 65px;
+                width: 60px;
+                margin-bottom: 6px;
+            }
+
+            .nav {
+                display: flex;
+            }
+
+
+
+            .hamburger {
+                display: none;
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                cursor: pointer;
+                color: #ffffff;
+                z-index: 1100;
+                transition: transform 0.3s ease;
+            }
+
+            .hamburger.open i {
+                transform: rotate(90deg);
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .hamburger {
+                    display: block;
+                }
+
+                .nav {
+                    flex-direction: column;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background: rgb(167, 96, 42);
+                    overflow: hidden;
+                    max-height: 0;
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateY(-10px);
+                    transition: all 0.4s ease-in-out;
+                }
+
+                .nav.active {
+                    max-height: 700px;
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                }
+
+                .nav-links {
+                    flex-direction: column;
+                    gap: 0;
+                }
+
+                .nav-links li {
+                    padding: 1rem;
+                    border-bottom: 1px solid #ddd;
+                }
+
+
+            }
+
+
+            /* === زخارف تراثية عربية === */
+
+
+            @keyframes fadeInUp {
+                0% {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes bounceIn {
+                0% {
+                    opacity: 0;
+                    transform: scale(0.5);
+                }
+
+                60% {
+                    opacity: 1;
+                    transform: scale(1.05);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+
+                50% {
+                    transform: translateY(-20px);
+                }
+            }
+
+
+            .logo img {
+                animation: bounceIn 1.2s ease-out forwards;
+                width: 80px;
+            }
+
+            .welcome {
+                animation: fadeInUp 1s ease-out forwards;
+                animation-delay: 0.4s;
+                opacity: 0;
+            }
+
+            section .title {
+                animation: fadeInUp 1s ease forwards;
+                animation-delay: 0.5s;
+                opacity: 0;
+            }
+
+
+            .container {
+                padding: 20px;
+                text-align: center;
+            }
+
+            .content .container {
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .icon {
+                font-size: 40px;
+                color: rgb(255, 111, 0);
+                margin-bottom: 10px;
+            }
+        </style>
+
+
+    <body>
+
+
+        <header>
+
+            <h1 class="logo">
+                <a href="#"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" /></a>
+            </h1>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav" id="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="/info">Information</a></li>
+                    <li><a href="/map">Interactive map</a></li>
+
+                    <li><a href="/chatbot">Chatbot</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+        </header>
+
+        <script>
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            const dropdown = document.querySelector('.dropdown');
+
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('open');
+            });
+
+            dropdown.addEventListener('click', function (event) {
+                event.stopPropagation();
+                this.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        </script>
+            <style>
+                #chatContainer {
+                    width: 600px;
+                    margin: 50px auto;
+                    background: #fff;
+                    border-radius: 10px;
+                    padding: 20px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+            
+                #chatLog {
+                    max-height: 400px;
+                    overflow-y: auto;
+                    border: 1px solid #ccc;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                }
+            
+                .user-message {
+                    color: blue;
+                    margin: 5px 0;
+                }
+            
+                .bot-message {
+                    color: green;
+                    margin: 5px 0;
+                }
+            
+                #userInput {
+                    width: 80%;
+                    padding: 10px;
+                }
+            
+                #sendButton {
+                    padding: 10px 20px;
+                }
+            
+                iframe {
+                    width: 100%;
+                    height: 300px;
+                    border: none;
+                    margin-top: 10px;
+                }
+            
+            
+            
+                .logo img {
+                    height: 65px;
+                    width: 60px;
+                    margin-bottom: 6px;
+                }
+            
+                .nav {
+                    display: flex;
+                }
+            
+            
+            
+            
+                .hamburger {
+                    display: none;
+                    background: none;
+                    border: none;
+                    font-size: 1.8rem;
+                    cursor: pointer;
+                    color: #ffffff;
+                    z-index: 1100;
+                    transition: transform 0.3s ease;
+                }
+            
+                .hamburger.open i {
+                    transform: rotate(90deg);
+                }
+            
+                /* Responsive */
+                @media (max-width: 768px) {
+                    .hamburger {
+                        display: block;
+                    }
+            
+                    .nav {
+                        flex-direction: column;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        right: 0;
+                        background: rgb(167, 96, 42);
+                        overflow: hidden;
+                        max-height: 0;
+                        opacity: 0;
+                        visibility: hidden;
+                        transform: translateY(-10px);
+                        transition: all 0.4s ease-in-out;
+                    }
+            
+                    .nav.active {
+                        max-height: 700px;
+                        opacity: 1;
+                        visibility: visible;
+                        transform: translateY(0);
+                    }
+            
+                    .nav-links {
+                        flex-direction: column;
+                        gap: 0;
+                    }
+            
+                    .nav-links li {
+                        padding: 1rem;
+                        border-bottom: 1px solid #ddd;
+                    }
+            
+                }
+            
+            
+            
+            
+                /* === زخارف تراثية عربية === */
+            
+            
+                @keyframes bounceIn {
+                    0% {
+                        opacity: 0;
+                        transform: scale(0.5);
+                    }
+            
+                    60% {
+                        opacity: 1;
+                        transform: scale(1.05);
+                    }
+            
+                    100% {
+                        transform: scale(1);
+                    }
+                }
+            
+            
+            
+                .logo img {
+                    animation: bounceIn 1.2s ease-out forwards;
+                    width: 80px;
+                }
+            </style>
+<div id="chatContainer">
+    <h2>Chat with TravelBot 🤖</h2>
+    <div id="chatLog"></div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type your question...">
+        <button id="sendButton" onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<style>
+    /* Chat Container */
+    #chatContainer {
+        max-width: 600px;
+        margin: 20px auto;
+        border: 2px solid #2c3e50;
+        border-radius: 15px;
+        padding: 15px;
+        background: #f9f9f9;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Chat Header */
+    #chatContainer h2 {
+        text-align: center;
+        margin-bottom: 10px;
+        color: #2c3e50;
+    }
+
+    /* Chat Log */
+    #chatLog {
+        flex: 1;
+        min-height: 300px;
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 10px;
+        background: #fff;
+    }
+
+    /* Messages */
+    .user-message {
+        text-align: right;
+        background: #d1f7c4;
+        padding: 8px 12px;
+        margin: 5px;
+        border-radius: 15px 15px 0 15px;
+        display: inline-block;
+        max-width: 80%;
+    }
+
+    .bot-message {
+        text-align: left;
+        background: #e0e0e0;
+        padding: 8px 12px;
+        margin: 5px;
+        border-radius: 15px 15px 15px 0;
+        display: inline-block;
+        max-width: 80%;
+    }
+
+    /* Input area */
+    .chat-input {
+        display: flex;
+        margin-top: 10px;
+    }
+
+    #userInput {
+        flex: 1;
+        padding: 10px;
+        border-radius: 10px 0 0 10px;
+        border: 1px solid #ccc;
+        font-size: 1em;
+    }
+
+    #sendButton {
+        padding: 10px 20px;
+        border: none;
+        background: #2c3e50;
+        color: #fff;
+        font-size: 1em;
+        border-radius: 0 10px 10px 0;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    #sendButton:hover {
+        background: #1a242f;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        #chatContainer {
+            width: 95%;
+            padding: 10px;
+        }
+
+        #chatLog {
+            min-height: 200px;
+            max-height: 300px;
+        }
+
+        #userInput {
+            font-size: 0.9em;
+        }
+
+        #sendButton {
+            padding: 10px;
+            font-size: 0.9em;
+        }
+    }
+</style>
+
+            <script>
+                function sendMessage() {
+                    const userInput = document.getElementById("userInput").value;
+                    if (!userInput.trim()) return;
+
+                    // Show user message
+                    const chatLog = document.getElementById("chatLog");
+                    chatLog.innerHTML += `<p class="user-message">👤 ${userInput}</p>`;
+
+                    fetch("/chat", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ message: userInput })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            chatLog.innerHTML += `<p class="bot-message">🤖 ${data.response}</p>`;
+                            if (data.iframe) {
+                                chatLog.innerHTML += data.iframe;
+                            }
+                            document.getElementById("userInput").value = "";
+                            chatLog.scrollTop = chatLog.scrollHeight;
+                        })
+                        .catch(err => {
+                            chatLog.innerHTML += `<p class="bot-message">⚠️ Error: ${err}</p>`;
+                        });
+                }
+            </script>
+        <script>
+            // Dropdown menu
+            document.querySelector('.dropdown').addEventListener('click', function () {
+                this.classList.toggle('active');
+            });
+
+
+        </script>
+        <script>
+            const sandstorm = document.querySelector('.sandstorm');
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const pageHeight = document.body.scrollHeight;
+
+                // عند اقتراب المستخدم من أسفل الصفحة (الصحراء)
+                if (scrollY + windowHeight >= pageHeight - 200) {
+                    sandstorm.style.opacity = '0.3';
+                } else {
+                    sandstorm.style.opacity = '0';
+                }
+            })
+        </script>
+
+
+    </body>
+
+</html>

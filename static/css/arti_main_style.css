@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Funnel+Display:wght@300..800&family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cabin', sans-serif;
+    background-color: #f0f0f0;
+}
+
+
+/* ======= الهيدر ======= */
+header {
+    position: relative;
+    height: 13.5vh;
+    background-color: rgb(255, 111, 0);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+/* ======= الشعار ======= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+                        .logo img {
+                            height: 65px;
+                            width: 60px;
+                            margin-bottom: 6px;
+                        }
+/* ======= روابط التنقل ======= */
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #611b00;
+}
+
+/* ======= زر القائمة (هامبورجر) للجوال ======= */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #fff;
+    z-index: 1100;
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.hamburger.open i {
+    transform: rotate(90deg);
+}
+
+/* ======= أنيميشن الشعار ======= */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ======= استجابة الشاشات الصغيرة ======= */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgb(167, 96, 42);
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.4s ease-in-out;
+    }
+
+    .nav.active {
+        max-height: 700px;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+    }
+
+    .nav-links li {
+        padding: 1rem;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+}
+section {
+    padding: 60px 20px;
+    background: #f9f9f9;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card1 {
+    border-radius: 15px;
+    background-color: white;
+    width: 21.25em;
+    box-shadow: 0 5px 25px rgba(128, 128, 128, 15%);
+    padding: 50px;
+    margin-bottom: 50px;
+    z-index: 666;
+    margin: 25;
+    margin-right: 25px;
+    min-height: 50vh;
+    transition: 0.7s ease;
+}
+
+.card1:hover {
+    background-color: rgb(48, 43, 43);
+    transform: scale(1.1);
+
+}
+
+.card2 {
+    min-height: 50vh;
+    border-radius: 15px;
+    background-color: white;
+    width: 21.25em;
+    box-shadow: 0 5px 25px rgba(128, 128, 128, 15%);
+    padding: 50px;
+    margin-right: 25px;
+    margin: 25;
+    transition: 0.7s ease;
+}
+
+.card2:hover {
+    background-color: rgb(48, 43, 43);
+    transform: scale(1.1);
+
+}
+
+
+.info h3 {
+
+    color: red;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin: 10px;
+}
+
+
+.content {
+    margin-top: 150px;
+}
+
+/* flag behinde info */
+.tourism_places-card {
+    background-color: rgb(255, 111, 0);
+    border: 1px solid #fff;
+    min-height: 14em;
+    width: 23em;
+    justify-content: center;
+
+    box-shadow: 0 5px 25px rgba(128, 128, 128, 15%);
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 20px;
+    transition: 0.7s ease;
+}
+
+.tourism_places-card:hover {
+    transform: scale(1.1);
+}
+
+.tourism_places-card:hover .p-image {
+    opacity: 0.9;
+
+}
+
+.p-image img {
+    width: 100%;
+}
+
+.p-info {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.p-category {
+    display: flex;
+    font-weight: 500;
+    font-size: 2em;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    /* لتمركز العناصر رأسياً */
+    margin-top: 10px;
+}
+
+
+hr {
+    border: none;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(219, 216, 216);
+}
+
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
+
+
+
+/* ===== Hamburger ===== */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.hamburger.open i {
+    transform: rotate(90deg);
+}
+
+/* ===== Animations ===== */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

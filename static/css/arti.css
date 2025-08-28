@@ -1,0 +1,29 @@
+h1{
+    font-size: 2.5em;
+    color: rgb(167, 96, 42);
+    text-align: center;
+    margin-top: 200px;
+}
+section img{
+    border: 12px solid rgb(167, 96, 42);
+    height: 100%;
+    z-index: 999;
+    border-radius: 10px;
+    margin: 90px;
+    margin-left: 40%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;}
+.desc-box {
+    width: 100%;
+    height: 100vh;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #4a0000;
+    font-size: 25px;
+    resize: none;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    color: #fff;
+    border: 1px solid #ccc;
+}
+

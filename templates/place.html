@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="place-container">
+    <h1>{{ place.name_place }}</h1>
+
+    <img class="IMG_PL" src="{{ place.link_photo }}" alt="{{ place.name_place }}">
+
+    <p><strong>Type:</strong> <span>{{ place.place_type }}</span></p>
+
+    <p><strong>Description:</strong></p>
+    <textarea readonly rows="6">{{ place.description }}</textarea>
+
+    <p><strong>Map:</strong></p>
+    <div class="map-container">
+        {{ place.iframe_url | safe }}
+    </div>
+</div>
+
+<style>
+    .place-container {
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #2c3e50;
+    }
+
+    .IMG_PL {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    span {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 15px 0;
+    }
+
+    textarea {
+        margin: 15px auto;
+        background-color: #f9f9f9;
+        color: #333;
+        display: block;
+        padding: 12px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 600px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        resize: none;
+    }
+
+    .map-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    iframe {
+        width: 100%;
+        max-width: 700px;
+        height: 400px;
+        border: 8px solid #000;
+        border-radius: 10px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        textarea {
+            width: 90%;
+        }
+
+        iframe {
+            height: 300px;
+            border: 5px solid #000;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 1.3rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        iframe {
+            height: 250px;
+        }
+    }
+</style>
+{% endblock %}

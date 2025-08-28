@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Add New Place</title>
+        <style>
+            body {
+                font-family: Arial;
+                background-color: #f4f4f4;
+                padding: 30px;
+            }
+
+            .form-container {
+                max-width: 600px;
+                background: white;
+                margin: auto;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px #ccc;
+            }
+
+            input,
+            select,
+            textarea {
+                width: 100%;
+                padding: 10px;
+                background: #ffffff84;
+                border: 1px solid #6f4444;
+                border-radius: 5px;
+                resize: none;
+                font-family: Arial, sans-serif;
+                margin-bottom: 10px;
+            }
+
+            textarea {
+                resize: vertical;
+            }
+
+            button {
+                background: #28a745;
+                color: white;
+                padding: 12px;
+                border: none;
+                border-radius: 5px;
+                width: 100%;
+                font-size: 16px;
+            }
+
+            button:hover {
+                background: #218838;
+            }
+
+            .error {
+                color: red;
+                font-weight: bold;
+                margin-bottom: 15px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="form-container">
+            <h2>Add New Place</h2>
+
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST">
+                <label>Image URL:</label>
+                <input type="text" name="link_photo" required>
+
+    <label>Place Type:</label>
+    <select name="place_type" id="type_place" required>
+        <option value="hotel">Hotel</option>
+        <option value="school">School</option>
+        <option value="bank">Bank</option>
+        <option value="restaurant">Restaurant</option>
+        <option value="park">Park</option>
+        <option value="museum">Museum</option>
+        <option value="shopping">Shopping</option>
+        <option value="other">Other</option>
+        <option value="cafe">Cafe</option>
+    </select>
+
+                <label>Place Name:</label>
+                <input type="text" name="name_place" required>
+
+                <label>Lat:</label>
+                <input type="number" name="lat" step="any" min="-90" max="90" required >
+
+                <label>Lng:</label>
+                <input type="number" name="lng" step="any" min="-180" max="180" required >
+
+                <label>Iframe URL:</label>
+                <input type="text" name="iframe_url" required >
+
+                <label>City</label>
+                <input type="text" name="city" required>
+
+                <label>Description:</label>
+                <textarea name="description" rows="5" required></textarea>
+
+                <button type="submit">Add Place</button>
+            </form>
+        </div>
+    </body>
+
+</html>

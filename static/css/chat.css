@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Funnel+Display:wght@300..800&family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cabin', sans-serif;
+    background-color: #f0f0f0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh;
+    background-color: rgb(255, 111,0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    padding: 0 2rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo {
+    
+    display: inline-flex;
+    width: 90px;
+    align-items: center;
+}
+
+.logo img {
+    width: 100px;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: rgb(70, 33, 5);
+}
+
+section {
+    padding: 10vh 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+section h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: rgb(70, 33, 5);
+}
+
+body {
+    padding-top: 10vh;
+    /* لتجنب اخفاء المحتوى تحت الرأس الثابت */
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: white;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 50%;
+}
+
+#chatLog {
+    margin: 20px 0;
+    padding: 20px;
+    font-size: 1.1em;
+    width: 50%;
+    background: #f4f4f4;
+    border-radius: 8px;
+    overflow-y: auto;
+    max-height: 300px;
+    text-align: left;
+    /* محاذاة النص إلى اليمين */
+}
+
+.user-message {
+    font-weight:bolder;
+    font-size: 1.3em;
+    color: rgb(143, 69, 0);
+    /* تحديد نمط مختلف لرسائل المستخدم */
+}
+
+
+.new-message {
+    animation: fadeIn 1s ease-in-out;
+}
+
+#userInput {
+    width: 50%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: left;
+    /* محاذاة النص إلى اليمين */
+}
+
+iframe {
+
+    border: none;
+    /* إزالة الحدود من الإطار */
+    border-radius: 8px;
+    /* زوايا مستديرة للإطار */
+    margin-top: 10px;
+}
+
+button {
+    width: 50%;
+    padding: 10px;
+    background-color: rgb(99, 43, 0);
+    color: white;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+button:hover {
+    background-color: rgb(58, 32, 0);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    /* التأكد من تناسب الصورة بشكل صحيح */
+    margin-top: 20px;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

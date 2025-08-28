@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dayman maak</title>
+
+        <style>
+            header {
+                position: relative;
+                height: 13.5vh;
+                background-color: rgb(255,111,0);
+                z-index: 1000;
+            }
+
+
+
+            .logo img {
+                height: 65px;
+                width: 60px;
+                margin-bottom: 6px;
+            }
+
+            .nav {
+                display: flex;
+            }
+
+            
+            
+            .hamburger {
+                display: none;
+                background: none;
+                border: none;
+                font-size: 1.8rem;
+                cursor: pointer;
+                color: #ffffff;
+                z-index: 1100;
+                transition: transform 0.3s ease;
+            }
+
+            .hamburger.open i {
+                transform: rotate(90deg);
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .hamburger {
+                    display: block;
+                }
+
+                .nav {
+                    flex-direction: column;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background:  rgb(167, 96, 42);
+                    overflow: hidden;
+                    max-height: 0;
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateY(-10px);
+                    transition: all 0.4s ease-in-out;
+                }
+
+                .nav.active {
+                    max-height: 700px;
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0);
+                }
+
+                .nav-links {
+                    flex-direction: column;
+                    gap: 0;
+                }
+
+                .nav-links li {
+                    padding: 1rem;
+                    border-bottom: 1px solid #ddd;
+                }
+
+    
+            }
+
+            section {
+                padding: 60px 20px;
+                background: #f9f9f9;
+            }
+
+            section:nth-child(even) {
+                background: #f0f0f0;
+            }
+
+            h2 {
+                font-size: 2rem;
+                margin-bottom: 20px;
+                color: #444;
+            }
+
+            p {
+                max-width: 800px;
+                color: #555;
+            }
+            section {
+                padding: 60px 20px;
+                background: #f9f9f9;
+            }
+
+            section:nth-child(even) {
+                background: #f0f0f0;
+            }
+            .concept {
+                text-align: center;
+            }
+
+            .concept h1 {
+                color: rgb(255, 111, 0);
+                font-size: 3rem;
+                letter-spacing: 0.2em;
+                transition: all 0.3s ease;
+            }
+
+            .hover {
+                display: inline-block;
+                margin: 0 0.2em;
+                transition: transform 0.3s;
+            }
+
+            .hover:hover {
+                transform: scale(1.2) rotate(5deg);
+                color: rgb(195, 96, 8);
+            }
+
+            .word span.char {
+                display: inline-block;
+                transition: transform 0.4s;
+            }
+
+            .word span.char:hover {
+                transform: scale(1.4) rotate(-10deg);
+                color: #1abc9c;
+            }
+
+            /* === زخارف تراثية عربية === */
+
+
+            @keyframes fadeInUp {
+                0% {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes bounceIn {
+                0% {
+                    opacity: 0;
+                    transform: scale(0.5);
+                }
+
+                60% {
+                    opacity: 1;
+                    transform: scale(1.05);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+
+                50% {
+                    transform: translateY(-20px);
+                }
+            }
+
+
+            .logo img {
+                animation: bounceIn 1.2s ease-out forwards;
+                width: 80px;
+            }
+
+            .welcome {
+                animation: fadeInUp 1s ease-out forwards;
+                animation-delay: 0.4s;
+                opacity: 0;
+            }
+
+            section .title {
+                animation: fadeInUp 1s ease forwards;
+                animation-delay: 0.5s;
+                opacity: 0;
+            }
+
+
+            .container {
+                padding: 20px;
+                text-align: center;
+            }
+
+            .content .container {
+                display: flex;
+                gap: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .icon {
+                font-size: 40px;
+                color: rgb(255, 111, 0);
+                margin-bottom: 10px;
+            }
+
+
+        </style>
+        <style>
+            @keyframes twinkle {
+
+                0%,
+                100% {
+                    opacity: 0.6;
+                    transform: scale(1);
+                }
+
+                50% {
+                    opacity: 1;
+                    transform: scale(1.4);
+                }
+            }
+        </style>
+        <style>
+            /* خلفية السحاب والصحراء */
+            body {
+                background: linear-gradient(to top, #f4e2d8, #cbe3f1);
+                overflow-x: hidden;
+                position: relative;
+            }
+
+            /* سحب متحركة */
+        </style>
+
+    <body>
+        
+       
+        <header>
+            
+                <h1 class="logo">
+                    <a href="#"><img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" /></a>
+                </h1>
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav" id="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="/info">Information</a></li>
+                        <li><a href="/map">Interactive map</a></li>
+
+                        <li><a href="/chatbot">Chatbot</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            
+        </header>
+        
+        <script>
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            const dropdown = document.querySelector('.dropdown');
+
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('open');
+            });
+
+            dropdown.addEventListener('click', function (event) {
+                event.stopPropagation();
+                this.classList.toggle('active');
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        </script>
+
+        <section>
+            <div class="container">
+                <h1 class="welcome"><img src="{{ url_for('static', filename='img/logo.png') }}" alt=""></h1>
+                <style>
+                    .welcome img{
+                        width:200px;
+                    }
+                </style>
+                <div class="concept">
+                    <h1>
+                        <span class="hover">W</span>
+                        <span class="hover">E</span>
+                        <span class="hover">L</span>
+                        <span class="hover">C</span>
+                        <span class="hover">O</span>
+                        <span class="hover">M</span>
+                        <span class="hover">E</span>
+                    </h1>
+                </div>
+            </div>
+        </section>
+
+        <section class="content" id="contact">
+          
+            <div class="wrap animate pop">
+                <div class="overlay">
+                    <div class="overlay-content animate slide-left delay-2">
+                        <h1 class="animate slide-left pop delay-4 pulse" style="color: #fff; font-size:2.3rem;" >Contact</h1>
+                        <p class="animate slide-left pop delay-5" style="color: white; margin-bottom: 2.5rem;">Let's get
+                            in touch!
+                        </p>
+                    </div>
+                    <div class="image-content animate slide delay-5"></div>
+
+                    <div class="dots animate">
+                        <div class="dot animate slide-up delay-6"></div>
+                        <div class="dot animate slide-up delay-7"></div>
+                        <div class="dot animate slide-up delay-8"></div>
+                    </div>
+                </div>
+                <div class="text"><a href="mailto:memo.ahmed1205@gmail.com">
+                    <div class="card animate slide-up delay-6" style="margin-bottom: 2rem; cursor: pointer;">
+                        <div class="icon hover-spin"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="info">
+                            <h3 class="pulse">Email</h3>
+                            <p><a href="mailto:memo.ahmed1205@gmail.com">memo.ahmed1205@gmail.com</a></p>
+                        </div>
+                    </div>
+                </a>
+                <a href="tel:+201067143404">
+                    <div class="card animate slide-up delay-7" style="cursor: pointer;">
+                        <div class="icon hover-spin"><i class="fa-solid fa-phone"></i></div>
+                        <div class="info">
+                            <h3 class="pulse">Phone Number</h3>
+                            <p><strong><span class="Egypt">Egypt</span></strong> <a href="tel:+201067143404">(+201067143404)</a>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://wa.me/201067143404" target="_blank">
+                    <div class="card animate slide-up delay-8" style="margin-top: 2rem; cursor: pointer;">
+                        <div class="icon hover-spin"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div class="info">
+                            <h3 class="pulse">WhatsApp</h3>
+                            <p><a href="https://wa.me/201067143404">Chat on WhatsApp +201067143404</a></p>
+                        </div>
+                    </div>
+                </a>
+                    <a href="mailto:miqtr1234@gmail.com">
+                        <div class="card animate slide-up delay-6" style="margin-bottom: 2rem; cursor: pointer;">
+                            <div class="icon hover-spin"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="info">
+                                <h3 class="pulse">Email</h3>
+                                <p><a href="mailto:memo.ahmed1205@gmail.com">miqtr1234@gmail.com</a></p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="tel:+201151101507">
+                        <div class="card animate slide-up delay-7" style="cursor: pointer;">
+                            <div class="icon hover-spin"><i class="fa-solid fa-phone"></i></div>
+                            <div class="info">
+                                <h3 class="pulse">Phone Number</h3>
+                                <p><strong><span class="Egypt">Egypt</span></strong> <a
+                                        href="tel:+201151101507">(+201151101507)</a>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="https://wa.me/201151101507" target="_blank">
+                        <div class="card animate slide-up delay-8" style="margin-top: 2rem; cursor: pointer;">
+                            <div class="icon hover-spin"><i class="fa-brands fa-whatsapp"></i></div>
+                            <div class="info">
+                                <h3 class="pulse">WhatsApp</h3>
+                                <p><a href="https://wa.me/201151101507">Chat on WhatsApp +201151101507</a></p>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+            <style>
+                /* إضافات أنيميشن */
+                * {
+                    padding: 0;
+                    margin: 0;
+                    box-sizing: border-box;
+                }
+
+
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                }
+
+                h1 {
+                    font-size: 5vmin;
+                    text-align: center;
+                    color: white;
+                }
+
+                p {
+                    font-size: max(10pt, 2.5vmin);
+                    line-height: 1.4;
+                    color: #0e390e;
+                    margin-bottom: 1.5rem;
+                    
+                }
+
+                /* Wrapper */
+                .wrap {
+                    display: flex;
+                    width: 85vmin;
+                    height: 65vmin;
+                    margin: 2rem auto;
+                    border: 8px solid;
+                    border-image: linear-gradient(-50deg, #5c4033, #8b5e3c, #a0522d, #cd853f, #deb887, #f5deb3, #8b5e3c) 1;
+                    ;
+                    transition: 0.3s ease-in-out;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                /* Overlay Section */
+                .overlay {
+                    position: relative;
+                    display: flex;
+                    width: 100%;
+                    height: 100%;
+                    padding: 1rem;
+                    background:rgb(255, 111, 0);
+                    transition: 0.4s ease-in-out;
+                    z-index: 1;
+                }
+
+                .overlay-content {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    width: 15vmin;
+                    height: 100%;
+                    padding: 0.5rem 0 0 0.5rem;
+                    border: 3px solid;
+                    border-image: linear-gradient(to bottom, #8b5e3c 5%, #a0522d 35% 65%, #deb887 95%) 0 0 0 100%;
+                    transition: 0.3s ease-in-out 0.2s;
+                    z-index: 1;
+                }
+
+
+
+                /* Dots */
+                .dots {
+                    position: absolute;
+                    bottom: 1rem;
+                    right: 2rem;
+                    display: flex;
+                    justify-content: space-around;
+                    width: 70px;
+                }
+
+                .dot {
+                    width: 1rem;
+                    height: 1rem;
+                    background: rgb(255, 0, 0);
+                    
+                    border-radius: 50%;
+                    transition: 0.3s ease-in-out 0.3s;
+                }
+
+                /* Right Text Section */
+                .text {
+                    display: grid;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 60vmin;
+                    height: 100%;
+                    padding: 3vmin 4vmin;
+                    background: #fff;
+                    box-shadow: inset 1px 1px 15px rgba(0, 0, 0, 0.4);
+                    overflow-y: auto;
+                }
+
+                /* Card Design */
+                .card {
+                    display: flex;
+                    align-items: center;
+                    background: #f4b777;
+                    border: 2px solid #f19513;
+                    border-radius: 12px;
+                    padding: 1rem;
+                    margin: 1rem 0;
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                    transition: 0.3s ease;
+                }
+
+                .card:hover {
+                    transform: scale(1.02);
+                    background: #f6ceb1;
+                }
+
+
+                .info p {
+                    color: #befabe;
+                    font-size: 1rem;
+                    word-break: break-word;
+                }
+
+                /* Hover Animation */
+                .hover-spin i {
+                    transition: transform 0.6s ease;
+                }
+
+                .hover-spin:hover i {
+                    transform: rotate(360deg);
+                }
+
+                .pulse {
+                    animation: pulse 2s infinite;
+                }
+
+                @keyframes pulse {
+                    0% {
+                        transform: scale(1);
+                    }
+
+                    50% {
+                        transform: scale(1.05);
+                    }
+
+                    100% {
+                        transform: scale(1);
+                    }
+                }
+
+                /* Hover Effects */
+                .wrap:hover .overlay {
+                    transform: translateX(-60vmin);
+                }
+
+                .wrap:hover .image-content {
+                    width: 30vmin;
+                }
+
+                .wrap:hover .overlay-content {
+                    border: none;
+                    transform: translateX(60vmin);
+                }
+
+                .wrap:hover .dots {
+                    transform: translateX(1rem);
+                }
+
+                .wrap:hover .dots .dot {
+                    background: white;
+                }
+
+                /* Animations */
+                .animate {
+                    animation-duration: 0.7s;
+                    animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+                    animation-fill-mode: backwards;
+                }
+
+                .pop {
+                    animation-name: pop;
+                }
+
+                @keyframes pop {
+                    0% {
+                        opacity: 0;
+                        transform: scale(0.5);
+                    }
+
+                    100% {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                }
+
+                .slide {
+                    animation-name: slide;
+                }
+
+                @keyframes slide {
+                    0% {
+                        opacity: 0;
+                        transform: translate(4em, 0);
+                    }
+
+                    100% {
+                        opacity: 1;
+                        transform: translate(0, 0);
+                    }
+                }
+
+                .slide-left {
+                    animation-name: slide-left;
+                }
+
+                @keyframes slide-left {
+                    0% {
+                        opacity: 0;
+                        transform: translate(-40px, 0);
+                    }
+
+                    100% {
+                        opacity: 1;
+                        transform: translate(0, 0);
+                    }
+                }
+
+                .slide-up {
+                    animation-name: slide-up;
+                }
+
+                @keyframes slide-up {
+                    0% {
+                        opacity: 0;
+                        transform: translateY(3em);
+                    }
+
+                    100% {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                /* Animation Delays */
+                .delay-1 {
+                    animation-delay: 0.3s;
+                }
+
+                .delay-2 {
+                    animation-delay: 0.6s;
+                }
+
+                .delay-3 {
+                    animation-delay: 0.9s;
+                }
+
+                .delay-4 {
+                    animation-delay: 1.2s;
+                }
+
+                .delay-5 {
+                    animation-delay: 1.5s;
+                }
+
+                .delay-6 {
+                    animation-delay: 1.8s;
+                }
+
+                .delay-7 {
+                    animation-delay: 2.1s;
+                }
+
+                .delay-8 {
+                    animation-delay: 2.4s;
+                }
+            </style>
+
+        </section>
+
+        <script>
+            // Dropdown menu
+            document.querySelector('.dropdown').addEventListener('click', function () {
+                this.classList.toggle('active');
+            });
+
+            // إغلاق القائمة عند النقر بالخارج
+            document.addEventListener('click', function (event) {
+                const dropdown = document.querySelector('.dropdown');
+                if (!dropdown.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+
+            // Reveal cards on scroll
+            function revealOnScroll() {
+                const cards = document.querySelectorAll('.card');
+                const windowHeight = window.innerHeight;
+
+                cards.forEach(card => {
+                    const cardTop = card.getBoundingClientRect().top;
+                    if (cardTop < windowHeight - 100) {
+                        card.classList.add('reveal');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', revealOnScroll);
+            window.addEventListener('load', revealOnScroll);
+
+            // Smooth scroll to contact section
+            document.querySelector('.nav-links a[href="#contact"]').addEventListener('click', function (event) {
+                event.preventDefault();
+                document.querySelector('#contact').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        </script>
+        <script>
+            const sandstorm = document.querySelector('.sandstorm');
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const pageHeight = document.body.scrollHeight;
+
+                // عند اقتراب المستخدم من أسفل الصفحة (الصحراء)
+                if (scrollY + windowHeight >= pageHeight - 200) {
+                    sandstorm.style.opacity = '0.3';
+                } else {
+                    sandstorm.style.opacity = '0';
+                }
+            })
+            </script>
+
+
+    </body>
+
+</html>

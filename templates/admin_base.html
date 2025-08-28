@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit Place</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f4f4f4;
+                padding: 40px;
+            }
+
+            .container {
+                background-color: #fff;
+                max-width: 600px;
+                margin: auto;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            }
+
+            h2 {
+                text-align: center;
+                color: #333;
+                margin-bottom: 20px;
+            }
+
+            label {
+                font-weight: bold;
+                display: block;
+                margin-top: 15px;
+                color: #444;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            textarea,
+            select {
+                width: 100%;
+                padding: 10px;
+                margin-top: 6px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 16px;
+                background-color: #fafafa;
+            }
+
+            textarea {
+                resize: vertical;
+            }
+
+            img {
+                display: block;
+                max-width: 100%;
+                max-height: 300px;
+                border-radius: 8px;
+                margin: 10px auto 20px;
+            }
+
+            button {
+                margin-top: 20px;
+                width: 100%;
+                padding: 12px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background 0.3s ease;
+            }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <h2>Edit: {{ place.name_place }}</h2>
+
+            <img src="{{ place.link_photo }}" alt="Preview">
+
+            <label>Name:</label>
+            <input type="text" id="name_place" value="{{ place.name_place }}">
+
+            <label>Description:</label>
+            <textarea id="description" rows="4">{{ place.description }}</textarea>
+
+            <label>Image Link:</label>
+            <input type="text" id="link_photo" value="{{ place.link_photo }}">
+
+            <label>Iframe URL:</label>
+            <input type="text" id="iframe_url" value="{{ place.iframe_url }}">
+
+            <label>Latitude:</label>
+            <input type="number" step="any" id="lat" value="{{ place.lat }}">
+
+            <label>Longitude:</label>
+            <input type="number" step="any" id="lng" value="{{ place.lng }}">
+            
+            <label >City:</label>
+            <input type="text" id="city" value="{{ place.city }}">
+
+            <label>Place Type:</label>
+            <select id="type_place">
+                <option value="hotel" {{ 'selected' if place.place_type=='hotel' else '' }}>Hotel</option>
+                <option value="school" {{ 'selected' if place.place_type=='school' else '' }}>School</option>
+                <option value="bank" {{ 'selected' if place.place_type=='bank' else '' }}>Bank</option>
+                <option value="restaurant" {{ 'selected' if place.place_type=='restaurant' else '' }}>Restaurant
+                </option>
+                <option value="park" {{ 'selected' if place.place_type=='park' else '' }}>Park</option>
+                <option value="museum" {{ 'selected' if place.place_type=='museum' else '' }}>Museum</option>
+                <option value="shopping" {{ 'selected' if place.place_type=='shopping' else '' }}>Shopping</option>
+                <option value="cafe" {{ 'selected' if place.place_type=='cafe' else '' }}>Cafe</option>
+                <option value="other" {{ 'selected' if place.place_type=='other' else '' }}>Other</option>
+            </select>
+
+      
+
+            <button onclick="submitEdit()">Update</button>
+        </div>
+
+<script>
+    function submitEdit() {
+        const getValue = (id) => {
+            const el = document.getElementById(id);
+            return el ? el.value.trim() : '';
+        };
+
+        const data = {
+            key: "{{ place_key }}",
+            name_place: getValue("name_place"),
+            description: getValue("description"),
+            link_photo: getValue("link_photo"),
+            iframe_url: getValue("iframe_url"),
+            place_type:getValue("type_place"),
+            city: getValue("city"),
+            lat: getValue("lat"),
+            lng: getValue("lng")
+        };
+
+        if (!data.name_place || !data.description || !data.link_photo) {
+            alert("Please fill all required fields.");
+            return;
+        }
+
+        fetch('/update-place', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(res => {
+                alert(res.message || res.error);
+                if (res.message) {
+                    window.location.href = "/admin-dashboard";
+                }
+            });
+    }
+</script>
+
+    </body>
+
+</html>
